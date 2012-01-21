@@ -4,6 +4,8 @@ module GroszHerd
 
   class Button
 
+    attr_reader :image
+
     include Magick
 
     Colors = ['white', '#ef2f15']
@@ -31,7 +33,7 @@ module GroszHerd
     end
     
     def render
-      unless @rendered
+      unless rendered?
 
         year_segments = [@year[0..1], @year[2..3]]
         metrics = []
@@ -52,9 +54,19 @@ module GroszHerd
       end
     end
 
+    def rendered?
+      @rendered
+    end
+
   end
 
   class Sheet
+
+    attr_reader :button
+
+    def initialize year = Time.now.year
+      @button = Button.new
+    end
 
   end
 
