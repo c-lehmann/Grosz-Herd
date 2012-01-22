@@ -75,14 +75,26 @@ module GroszHerd
         self.format = "PNG"
         self.background_color = "#FFFF"
       }
-      4.times do |i|
-        3.times do |j|
-          x = j * (@button.columns + 50)
-          y = i * (@button.rows + 50)
-          canvas.composite! @button.clone, x, y, Magick::AddCompositeOp
+    end
+
+    def image
+      columns.times do |col|
+        rows.times do |row|
+          x = col * (@button.innersquare_width)
+          y = row * ((@button.image.rows) + (@button.innersquare_width + @button.delta_diameter_innersquare / 2))
+          y = (y + @button.innersquare_width + @button.delta_diameter_innersquare / 2) if col % 2 == 1
+          @canvas.composite! @button.image.clone, x, y, Magick::AddCompositeOp
         end 
       end
-      canvas
+      @canvas
+    end
+
+    def columns
+      (@canvas.columns - @button.delta_diameter_innersquare) / @button.innersquare_width
+    end
+
+    def rows
+      (@canvas.rows - @button.delta_diameter_innersquare) / @button.innersquare_width
     end
 
   end
