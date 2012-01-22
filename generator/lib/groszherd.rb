@@ -53,6 +53,14 @@ module GroszHerd
       @button_image
     end
 
+    def innersquare_width
+      (image.columns / Math.sqrt(2)).to_i
+    end
+
+    def delta_diameter_innersquare
+      image.columns - innersquare_width
+    end
+
   end
 
   class Sheet
