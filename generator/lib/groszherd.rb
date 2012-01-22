@@ -70,11 +70,8 @@ module GroszHerd
     include Magick
 
     def initialize year = Time.now.year
-      @button = Button.new(year).image
-    end
-
-    def image
-      canvas = Image.new(4517, 6050){
+      @button = Button.new(year)
+      @canvas = Image.new(4517, 6050){
         self.format = "PNG"
         self.background_color = "#FFFF"
       }
