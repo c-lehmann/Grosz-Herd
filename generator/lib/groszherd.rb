@@ -69,6 +69,8 @@ module GroszHerd
 
   class Sheet
 
+    PADDING = 100
+
     attr_reader :button
 
     include Magick
@@ -84,8 +86,8 @@ module GroszHerd
     def image
       rows.times do |row|
         columns.times do |col|
-          x = col * (@button.image.columns + Button::PADDING)
-          y = row * (@button.image.rows + Button::PADDING)
+          x = col * (@button.image.columns + Button::PADDING) + PADDING
+          y = row * (@button.image.rows + Button::PADDING) + PADDING
           @canvas.composite! @button.image.clone, x, y, Magick::AddCompositeOp
         end 
       end
@@ -93,11 +95,11 @@ module GroszHerd
     end
 
     def columns
-      @canvas.columns / (@button.image.columns + Button::PADDING)
+      (@canvas.columns - PADDING * 2) / (@button.image.columns + Button::PADDING)
     end
 
     def rows
-      @canvas.rows / (@button.image.rows + Button::PADDING)
+      (@canvas.rows - PADDING * 2) / (@button.image.rows + Button::PADDING)
     end
 
   end
