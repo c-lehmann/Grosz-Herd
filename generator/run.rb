@@ -9,7 +9,6 @@ get '/button/:year' do |year|
   begin
     content_type "image/png"
     button = GroszHerd::Button.new year 
-    button.render
     button.image.to_blob
   rescue ArgumentError => e
     halt 400, {'Content-Type' => 'text/plain'}, e.message
