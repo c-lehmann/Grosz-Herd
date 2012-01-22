@@ -7,11 +7,10 @@ module GroszHerd
   class Button
 
     PADDING = 100
-
-    include Magick
-
     Colors = ['white', '#ef2f15']
     
+    include Magick
+
     def initialize year = Time.now.year
       @year = year.to_s
       raise ArgumentError, "Year must have 4 numbers." unless @year.length == 4
