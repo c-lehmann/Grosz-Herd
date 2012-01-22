@@ -18,8 +18,8 @@ module GroszHerd
       image.display
     end
 
-    def save
-      image.write '/Users/clehmann/Desktop/b.png'
+    def save filename
+      image.write filename
     end
     
     def image
@@ -60,7 +60,7 @@ module GroszHerd
     attr_reader :button
 
     def initialize year = Time.now.year
-      @button = Button.new
+      @button = Button.new(year).image
     end
 
   end
