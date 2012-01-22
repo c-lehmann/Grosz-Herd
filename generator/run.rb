@@ -2,7 +2,7 @@ require 'sinatra'
 require './lib/groszherd'
 
 get '/' do
-  'Hello there!'
+  erb :index
 end
 
 get '/button/:year' do |year|

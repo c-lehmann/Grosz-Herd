@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <title>‹Groß Herd›-Button-Generator</title>
+    <script type="text/javascript" charset="utf-8">
+!function(a,b){typeof define=="function"?define(b):typeof module!="undefined"?module.exports=b():this[a]=this.domReady=b()}("domready",function(a){function l(a){k=1;while(a=b.shift())a()}var b=[],c,d=!1,e=document,f=e.documentElement,g=f.doScroll,h="DOMContentLoaded",i="addEventListener",j="onreadystatechange",k=/^loade|c/.test(e.readyState);e[i]&&e[i](h,c=function(){e.removeEventListener(h,c,d),l()},d),g&&e.attachEvent(j,c=function(){/^c/.test(e.readyState)&&(e.detachEvent(j,c),l())});return a=g?function(c){self!=top?k?c():b.push(c):function(){try{f.doScroll("left")}catch(b){return setTimeout(function(){a(c)},50)}c()}()}:function(a){k?a():b.push(a)}})
+
+      domReady(function(){
+        var 
+          getButtonBtn = document.getElementById('button'),
+          getSheetBtn = document.getElementById('sheet'),
+          yearInputText = document.getElementById('year'),
+          form = document.getElementById('form')
+        ;
+
+        form.addEventListener('submit', function(){ return false; });
+        
+        getButtonBtn.addEventListener('click', function() {
+          window.location = '/button/' + yearInputText.value  
+        });
+
+        getSheetBtn.addEventListener('click', function() {
+          window.location = '/sheet/' + yearInputText.value  
+        });
+
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Groß-Herd-Button-Generator</h1>  
+    <form id="form" action="#" method="GET">
+      <label for="year">Jahr</label><input type="text" name="year" value="<%= Time.now.year %>" id="year">
+      <button type="button" id="button">Hole Button</button>
+      <button type="button" id="sheet">Hole Bogen</button>
+    </form>
+  </body>
+</html>
