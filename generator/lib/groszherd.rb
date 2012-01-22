@@ -11,8 +11,11 @@ module GroszHerd
     Colors = ['white', '#ef2f15']
     
     def initialize year = Time.now.year
-      @image = ImageList.new('/Users/clehmann/Desktop/Grosz-Herd/generator/resources/plain_button.png')
       @year = year.to_s
+
+      raise ArgumentError, "Year must have 4 numbers." unless @year.length == 4
+
+      @image = ImageList.new('/Users/clehmann/Desktop/Grosz-Herd/generator/resources/plain_button.png')
       @draw = Draw.new {
         self.pointsize = 324
         self.font = '/Users/clehmann/Desktop/Grosz-Herd/generator/resources/fonts/COLOGNE.TTF'
