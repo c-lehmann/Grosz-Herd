@@ -2,6 +2,8 @@ module GroszHerd
 
   require 'RMagick'
 
+  ROOTDIR = File.expand_path(File.dirname(__FILE__) + "/..")
+
   class Button
 
     include Magick
@@ -25,10 +27,10 @@ module GroszHerd
     def image
       if @button_image == nil
 
-        imagelist = ImageList.new('/Users/clehmann/Desktop/Grosz-Herd/generator/resources/plain_button.png')
+        imagelist = ImageList.new(ROOTDIR + "/resources/plain_button.png")
         draw = Draw.new {
           self.pointsize = 324
-          self.font = '/Users/clehmann/Desktop/Grosz-Herd/generator/resources/fonts/COLOGNE.TTF'
+          self.font = ROOTDIR + "/resources/fonts/COLOGNE.TTF"
           self.font_weight = BoldWeight
           self.gravity = CenterGravity
         }
