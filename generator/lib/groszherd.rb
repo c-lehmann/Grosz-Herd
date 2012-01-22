@@ -6,6 +6,8 @@ module GroszHerd
 
   class Button
 
+    PADDING = 100
+
     include Magick
 
     Colors = ['white', '#ef2f15']
@@ -80,11 +82,10 @@ module GroszHerd
     end
 
     def image
-      columns.times do |col|
-        rows.times do |row|
-          x = col * (@button.innersquare_width)
-          y = row * ((@button.image.rows) + (@button.innersquare_width + @button.delta_diameter_innersquare / 2))
-          y = (y + @button.innersquare_width + @button.delta_diameter_innersquare / 2) if col % 2 == 1
+      rows.times do |row|
+        columns.times do |col|
+          x = col * (@button.image.columns + Button::PADDING)
+          y = row * (@button.image.rows + Button::PADDING)
           @canvas.composite! @button.image.clone, x, y, Magick::AddCompositeOp
         end 
       end
@@ -92,11 +93,11 @@ module GroszHerd
     end
 
     def columns
-      (@canvas.columns - @button.delta_diameter_innersquare) / @button.innersquare_width
+      @canvas.columns / (@button.image.columns + Button::PADDING)
     end
 
     def rows
-      (@canvas.rows - @button.delta_diameter_innersquare) / @button.innersquare_width
+      @canvas.rows / (@button.image.rows + Button::PADDING)
     end
 
   end
