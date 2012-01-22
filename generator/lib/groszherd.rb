@@ -59,8 +59,25 @@ module GroszHerd
 
     attr_reader :button
 
+    include Magick
+
     def initialize year = Time.now.year
       @button = Button.new(year).image
+    end
+
+    def image
+      canvas = Image.new(4517, 6050){
+        self.format = "PNG"
+        self.background_color = "#FFFF"
+      }
+      4.times do |i|
+        3.times do |j|
+          x = j * (@button.columns + 50)
+          y = i * (@button.rows + 50)
+          canvas.composite! @button.clone, x, y, Magick::AddCompositeOp
+        end 
+      end
+      canvas
     end
 
   end
