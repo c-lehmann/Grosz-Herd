@@ -76,10 +76,14 @@ module GroszHerd
 
     def initialize year = Time.now.year
       @button = Button.new(year)
-      @canvas = Image.new(4517, 6050){
-        self.format = "PNG"
-        self.background_color = "#FFFF"
-      }
+      @canvas = Image.new(4517, 6050)
+      
+      @canvas.format = "PNG"
+      @canvas.background_color = "#FFFF"
+      @canvas.units = @button.image.units
+      @canvas.x_resolution = @button.image.x_resolution
+      @canvas.y_resolution = @button.image.y_resolution
+
     end
 
     def image
