@@ -31,9 +31,14 @@
   <body>
     <div id="header"><h1>Groß Herd fun Marle</h1> <h2>Button-Generator</h2></div>  
     <form id="form" action="#" method="GET">
-      <label for="year">Jahr</label><input type="text" name="year" value="<%= Time.now.year %>" id="year">
-      <button type="button" id="button">Hole Button</button>
-      <button type="button" id="sheet">Hole Bogen</button>
+      <p>
+        <label for="year">Erstelle Buttons für das Jahr:</label>
+        <input type="text" name="year" value="<%= Time.now.year %>" id="year">
+      </p>
+      <p>
+        <button type="button" id="button">Nur einen Button</button>
+        <button type="button" id="sheet">6 Buttons auf ein DINA4-Blatt</button>
+      </p>
     </form>
   </body>
 </html>
