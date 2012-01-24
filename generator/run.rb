@@ -1,5 +1,6 @@
-require 'sinatra'
+require 'rubygems'
 require 'bundler/setup'
+require 'sinatra'
 require './lib/groszherd'
 
 get '/' do
