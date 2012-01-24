@@ -28,3 +28,7 @@ get '/sheet/:year' do |year|
     halt 400, {'Content-Type' => 'text/plain'}, e.message
   end
 end
+
+get '/screen.css' do
+  sass :screen
+end
