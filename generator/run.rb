@@ -1,4 +1,5 @@
 require 'sinatra'
+require 'bundler/setup'
 require './lib/groszherd'
 
 get '/' do
