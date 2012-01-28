@@ -11,6 +11,7 @@
         var 
           getButtonBtn = document.getElementById('button'),
           getSheetBtn = document.getElementById('sheet'),
+          editBtn = document.getElementById('edit'),
           yearInputText = document.getElementById('year'),
           form = document.getElementById('form')
         ;
@@ -25,6 +26,10 @@
           window.location = '/sheet/' + yearInputText.value  
         });
 
+        editBtn.addEventListener('click', function() {
+          yearInputText.focus();  
+        });
+
       });
     </script>
   </head>
@@ -35,6 +40,7 @@
       <p>
         <label for="year">Erstelle Buttons für das Jahr:</label>
         <input type="text" name="year" value="<%= Time.now.year %>" id="year">
+        <span id="edit">✍</span>
       </p>
       <p>
         <button type="button" id="button">Nur einen Button</button>
