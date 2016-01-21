@@ -1,3 +1,4 @@
+require "pry"
 module GroszHerd
 
   require 'RMagick'
@@ -6,7 +7,7 @@ module GroszHerd
 
   class Button
 
-    PADDING = 100
+    PADDING = 0
     Colors = ['white', '#ef2f15']
     
     include Magick
@@ -68,7 +69,7 @@ module GroszHerd
 
   class Sheet
 
-    PADDING = 100
+    PADDING = 50
 
     attr_reader :button
 
@@ -77,32 +78,44 @@ module GroszHerd
     def initialize year = Time.now.year
       @button = Button.new(year)
       @canvas = Image.new(4517, 6050)
+      #@canvas = Image.new(6050, 4517)
       
       @canvas.format = "PNG"
       @canvas.background_color = "#FFFF"
       @canvas.units = @button.image.units
       @canvas.x_resolution = @button.image.x_resolution
       @canvas.y_resolution = @button.image.y_resolution
-
     end
 
     def image
-      rows.times do |row|
-        columns.times do |col|
-          x = col * (@button.image.columns + Button::PADDING) + PADDING
-          y = row * (@button.image.rows + Button::PADDING) + PADDING
-          @canvas.composite! @button.image.clone, x, y, Magick::AddCompositeOp
-        end 
+      
+      r = PADDING + @button.image.columns / 2
+      current_row = 0
+
+      top = PADDING
+
+      while top < @canvas.rows do
+        
+        if current_row % 2 == 0
+          left = PADDING
+        else 
+          left = PADDING - r
+        end
+
+        while left < @canvas.columns do
+          @canvas.composite!(@button.image.clone, left, top, Magick::AddCompositeOp) if is_fitting top, left, r 
+          left = left + 2*r
+        end
+        top = top + (Math.sqrt(3) * r).to_i
+        current_row = current_row + 1
       end
       @canvas
     end
+    
+    private
 
-    def columns
-      (@canvas.columns - PADDING * 2) / (@button.image.columns + Button::PADDING)
-    end
-
-    def rows
-      (@canvas.rows - PADDING * 2) / (@button.image.rows + Button::PADDING)
+    def is_fitting top, left, r
+      left >= 0 && @canvas.columns > left + 2 * r && @canvas.rows > top + 2 * r
     end
 
   end
