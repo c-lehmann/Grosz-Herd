@@ -30,7 +30,7 @@ module GroszHerd
 
         imagelist = ImageList.new(ROOTDIR + "/resources/plain_button.png")
         draw = Draw.new {
-          self.pointsize = 324
+          self.pointsize = 300
           self.font = ROOTDIR + "/resources/fonts/COLOGNE.TTF"
           self.font_weight = BoldWeight
           self.gravity = CenterGravity
