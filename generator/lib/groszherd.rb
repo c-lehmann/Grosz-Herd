@@ -78,7 +78,6 @@ module GroszHerd
     def initialize year = Time.now.year
       @button = Button.new(year)
       @canvas = Image.new(4517, 6050)
-      #@canvas = Image.new(6050, 4517)
       
       @canvas.format = "PNG"
       @canvas.background_color = "#FFFF"
@@ -88,34 +87,67 @@ module GroszHerd
     end
 
     def image
-      
+      [positions_by_row, positions_by_column].max_by {|p| p.length }.each do |pos|
+        @canvas.composite!(@button.image.clone, pos[1], pos[0], Magick::AddCompositeOp)
+      end
+      @canvas
+    end
+
+
+    private
+
+    def is_fitting top, left, r
+      top >= 0 && left >= 0 && @canvas.columns > left + 2 * r && @canvas.rows > top + 2 * r
+    end
+
+    def positions_by_row
+
       r = PADDING + @button.image.columns / 2
       current_row = 0
-
       top = PADDING
+      positions = []
 
-      while top < @canvas.rows do
-        
+      while top < @canvas.rows do  
         if current_row % 2 == 0
           left = PADDING
         else 
           left = PADDING - r
         end
-
         while left < @canvas.columns do
-          @canvas.composite!(@button.image.clone, left, top, Magick::AddCompositeOp) if is_fitting top, left, r 
+          positions.push([top, left]) if is_fitting top, left, r
           left = left + 2*r
         end
         top = top + (Math.sqrt(3) * r).to_i
         current_row = current_row + 1
       end
-      @canvas
+      positions
     end
-    
-    private
 
-    def is_fitting top, left, r
-      left >= 0 && @canvas.columns > left + 2 * r && @canvas.rows > top + 2 * r
+    def positions_by_column
+      r = PADDING + @button.image.columns / 2
+      current_col = 0
+      top = PADDING
+      left = PADDING
+      positions = []
+
+      while left < @canvas.columns do
+
+        if current_col % 2 == 0
+          top = PADDING
+        else 
+          top = PADDING - r
+        end
+        
+        while top < @canvas.rows do  
+          positions.push([top, left]) if is_fitting top, left, r
+          
+          top = top + 2*r  
+        end
+        
+        left = left + (Math.sqrt(3) * r).to_i
+        current_col = current_col + 1
+      end
+      positions
     end
 
   end
