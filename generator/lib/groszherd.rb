@@ -1,7 +1,6 @@
-require "pry"
 module GroszHerd
 
-  require 'RMagick'
+  require 'rmagick'
 
   ROOTDIR = File.expand_path(File.dirname(__FILE__) + "/..")
 
