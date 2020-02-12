@@ -1,12 +1,9 @@
-FROM ruby
-MAINTAINER Christian Lehmann <cl@c-lehmann.de>
+FROM ruby:2.3
+LABEL author="Christian Lehmann <cl@c-lehmann.de>"
 
-RUN apt-get install -y git 
-RUN git clone https://github.com/c-lehmann/Grosz-Herd.git
+COPY generator /app
+WORKDIR /app
 
-WORKDIR /Grosz-Herd/
-RUN rm -rf .git archive
-WORKDIR generator/
 RUN bundle install
 ENTRYPOINT ["ruby", "run.rb"]
 EXPOSE 4567
