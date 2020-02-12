@@ -87,7 +87,7 @@ module GroszHerd
 
     def image
       [positions_by_row, positions_by_column].max_by { |p| p.length }.each do |pos|
-        @canvas.composite!(@button.image.clone, pos[1], pos[0], Magick::AddCompositeOp)
+        @canvas.composite!(@button.image.clone, pos[1], pos[0], Magick::OverCompositeOp)
       end
       @canvas
     end
