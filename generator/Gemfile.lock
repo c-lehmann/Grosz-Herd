@@ -14,11 +14,6 @@ GEM
       ffi (~> 1.0)
     rmagick (4.0.0)
     ruby2_keywords (0.0.2)
-    sass (3.7.4)
-      sass-listen (~> 4.0.0)
-    sass-listen (4.0.0)
-      rb-fsevent (~> 0.9, >= 0.9.4)
-      rb-inotify (~> 0.9, >= 0.9.7)
     sinatra (2.0.8.1)
       mustermann (~> 1.0)
       rack (~> 2.0)
@@ -35,7 +30,6 @@ PLATFORMS
 
 DEPENDENCIES
   rmagick
-  sass
   sinatra
   thin
 

@@ -1,7 +1,6 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
-require 'sass'
 require './lib/groszherd'
 
 set :bind, "0.0.0.0"
@@ -34,8 +33,4 @@ get '/sheet/:year' do |year|
     content_type "text/plain"
     halt 400, {'Content-Type' => 'text/plain'}, e.message
   end
-end
-
-get '/screen.css' do
-  sass :screen
 end
