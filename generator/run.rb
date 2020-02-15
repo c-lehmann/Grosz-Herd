@@ -1,36 +1,9 @@
-require 'rubygems'
-require 'bundler/setup'
-require 'sinatra'
 require './lib/groszherd'
 
-set :bind, "0.0.0.0"
-
-get '/' do
-  erb :index
-end
-
-get '/button/:year' do |year|
-  begin
-    button = GroszHerd::Button.new year 
-    
-    content_type "image/png"
-    headers "Content-disposition" => "attachment; filename=grosz_herd_button_" + year +".png"
-    button.image.to_blob
-  rescue ArgumentError => e
-    content_type "text/plain"
-    halt 400, {'Content-Type' => 'text/plain'}, e.message
-  end
-end
-
-get '/sheet/:year' do |year|
-  begin
-    sheet = GroszHerd::Sheet.new year 
-    
-    content_type "image/png"
-    headers "Content-disposition" => "attachment; filename=grosz_herd_buttons_" + year +".png"
-    sheet.image.to_blob
-  rescue ArgumentError => e
-    content_type "text/plain"
-    halt 400, {'Content-Type' => 'text/plain'}, e.message
-  end
+if ARGV[1] == "button"
+  button = GroszHerd::Button.new ARGV[0]
+  puts button.image.to_blob
+else
+  sheet = GroszHerd::Sheet.new ARGV[0]
+  puts sheet.image.to_blob
 end

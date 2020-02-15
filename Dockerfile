@@ -6,4 +6,3 @@ WORKDIR /app
 
 RUN bundle install
 ENTRYPOINT ["ruby", "run.rb"]
-EXPOSE 4567
