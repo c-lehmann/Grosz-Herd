@@ -1,0 +1,23 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    observer (0.1.2)
+    pkg-config (1.6.5)
+    rmagick (6.2.0)
+      observer (~> 0.1)
+      pkg-config (~> 1.4)
+
+PLATFORMS
+  arm64-darwin-25
+  ruby
+
+DEPENDENCIES
+  rmagick (~> 6.2)
+
+CHECKSUMS
+  observer (0.1.2) sha256=d8a3107131ba661138d748e7be3dbafc0d82e732fffba9fccb3d7829880950ac
+  pkg-config (1.6.5) sha256=33f9f81c5322983d22b439b8b672f27777b406fea23bfec74ff14bbeb42ec733
+  rmagick (6.2.0) sha256=792791ccf513d84c48bac44ae12fa6988e25d27387f95bbf4dd44dcc8486569f
+
+BUNDLED WITH
+  4.0.3

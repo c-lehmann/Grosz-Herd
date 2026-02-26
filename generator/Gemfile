@@ -1,2 +1,2 @@
-source "http://rubygems.org"
-gem 'rmagick', '~> 3.2'
+source "https://rubygems.org"
+gem 'rmagick', '~> 6.2'
